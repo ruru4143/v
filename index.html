@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VirtuellerRealraum</title>
+    <meta charset="utf-8"/>
+
+    <script src='https://meet.jit.si/external_api.js'></script>
+
+    <style type="text/css">
+        body {
+            background: rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        div#nav {
+            color: white;
+            padding: 0.5em;
+            margin: 0 0.5em 0.5em 0.5em;
+            border: 2px;
+            border-style: double;
+            background: #761407;
+        }
+
+        div#nav h3 {
+            display: inline-block;
+            margin: 0;
+            font-size: 1em;
+        }
+
+        div#nav a {
+            margin-bottom: 0.5em;
+            display: inline-block;
+        }
+        div#nav a:link { 
+            color: white;
+        }
+        div#nav a:visited {
+            color: white;
+        }
+        div#nav a:hover {
+            color: darkgrey;
+        }
+        div#nav a:focus { 
+            color: darkgrey;
+        }
+        div#nav a.active {
+            background-color: black;
+            padding: 2px;
+        }
+
+        div#meet {
+            width: 99vw;
+            height: 90vh;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body id="body">
+    <div id="nav">
+        <a href="index.html">Startseite</a> | 
+        <h3>VirtuellerRealraum:</h3> 
+        <a href="index.html?room=r3LoTHR"    class="night">LoTHR</a>  | 
+        <a href="index.html?room=r3Cx"       class="night">Cx</a> | 
+        <a href="index.html?room=r3OLGA"     class="night">OLGA</a> | 
+        <a href="index.html?room=r3MaSha"    class="night">MaSha</a> | 
+        <a href="index.html?room=r3R2W2"     class="night">R2W2</a> | 
+        <a href="index.html?room=r3Tesla"    class="night">Tesla</a> | 
+        <a href="index.html?room=r3realFunk" class="night">realFunk</a> | 
+        <a href="index.html?room=r3Küche"    class="night">Küche</a>
+    </div>
+
+    <div id="meet">     
+        <h1>Welcome!</h1>
+        Servus. Willkommen im <i>virtuellen realraum</i>. 
+
+        <h2>Hä❓</h2>
+        <p>Jo eh, real goes virtual!</p>
+
+        <h2>🤔 Was braucht man dazu?</h2>
+        <p> 💻 Einen Laptop mit Webcam, ein Tablet, oder ein Smartphone.</p>
+        <p>📷 Wichtig ist die Cam, ohne geht's nicht. 🎧 Am besten auch Kopfhörer.</p>
+
+        <h2>⁉️ Und dann?</h2>
+        <p><strong>Einfach oben einen Raum anklicken.</strong>
+        (bzw. am Handy den Raumnamen angeben)</p>
+        <p>Verwendet Jitsi, also bitte Javascript erlauben.</p>
+
+        <h2>💻 Technische Erklärungen</h2>
+        <p><strong>Am Desktop:</strong> Am besten geht's mit Chrome, <a href="https://www.google.com/intl/de/chrome/">hier downloadbar</a>.</p>
+
+        <p><strong>Am Smartphone:</strong> die Jitsi Meet App installieren und einen der Räume betreten.</p>
+        <p>
+            <a href="https://itunes.apple.com/us/app/jitsi-meet/id1165103905" rel="noopener" target="_blank">
+            <img height="40px" src="https://web-cdn.jitsi.net/meetjitsi_3902.570/images/welcome_page/appstore.svg"></a>
+            <a href="https://play.google.com/store/apps/details?id=org.jitsi.meet" rel="noopener" target="_blank">
+            <img height="40px" src="https://web-cdn.jitsi.net/meetjitsi_3902.570/images/welcome_page/googleplay.png"></a>
+        </p>
+      
+        <hr />
+
+        <p>Bei Problemen & Fragen einfach <a href="https://realraum.at/wiki/doku.php?id=realraum#wie_erreichst_du_uns_-_kommunikation">im Matrix/IRC fragen</a>.</p>
+    </div>
+
+    <script type="text/javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.has('room')) {
+            const room = urlParams.get('room');
+            console.log("Room: " + room);
+
+            document.querySelector('#meet').innerHTML= '';
+            
+            const domain = 'meet.jit.si';
+            const options = {
+                roomName: room,
+                width: "100%",
+                height: "100%",
+                parentNode: document.querySelector('#meet'),
+                noSSL: false
+            };
+            const api = new JitsiMeetExternalAPI(domain, options);
+
+        } else {
+            console.log("Room not specified.");
+        }
+        
+        for(var i=0, l=document.links.length; i<l; i++) {
+            if(document.links[i].href == window.location.href) {
+                document.links[i].classList.add("active");
+            }
+        }
+    </script>
+</body>
+</html>
